@@ -41,7 +41,7 @@ def chatgpt(messages, model, temperature=0.0, max_tokens=4000, n=1, stop=None) -
     return outputs
 
 
-def deepseek_chat(messages, model, max_tokens, n, stop) -> list:
+def deepseek_chat(messages, model, temperature, max_tokens, n, stop) -> list:
     """Handle chat completions using Deepseek API"""
     global completion_tokens, prompt_tokens
     outputs = []
@@ -59,12 +59,19 @@ def deepseek_chat(messages, model, max_tokens, n, stop) -> list:
         
         # Create multiple requests if n > 1
         for _ in range(batch_size):
+            # Note: temperature is passed but has no effect for deepseek-reasoner
             res = deepseek_client.chat.completions.create(
                 model=api_model,
                 messages=messages,
                 max_tokens=max_tokens,
                 stop=stop
             )
+            
+            # For deepseek-reasoner, we might want to capture the reasoning content
+            if model.startswith("deepseek-r") and hasattr(res.choices[0].message, 'reasoning_content'):
+                # Store reasoning content somewhere if needed
+                reasoning = res.choices[0].message.reasoning_content
+                # Could log or store this for debugging/analysis
             
             outputs.append(res.choices[0].message.content)
             
@@ -83,7 +90,18 @@ def gpt_usage(backend="gpt-4"):
         cost = completion_tokens / 1000 * 0.03 + prompt_tokens / 1000 * 0.01
     elif backend == "gpt-3.5-turbo":
         cost = completion_tokens / 1000 * 0.002 + prompt_tokens / 1000 * 0.0015
+    elif backend == "deepseek-r1":
+        # Deepseek Reasoner pricing (standard rate), not off peak discount rates. 
+        # Input: $0.55 per 1M tokens
+        # Output: $2.19 per 1M tokens
+        input_cost = prompt_tokens / 1000000 * 0.55
+        output_cost = completion_tokens / 1000000 * 2.19
+        cost = input_cost + output_cost
     elif backend.startswith("deepseek"):
-        # Add Deepseek pricing - adjust these values based on actual pricing
-        cost = completion_tokens / 1000 * 0.002 + prompt_tokens / 1000 * 0.001
+        # Generic pricing for other Deepseek models (standard rate)
+        # Input: $0.27 per 1M tokens
+        # Output: $1.10 per 1M tokens
+        input_cost = prompt_tokens / 1000000 * 0.27
+        output_cost = completion_tokens / 1000000 * 1.10
+        cost = input_cost + output_cost
     return {"completion_tokens": completion_tokens, "prompt_tokens": prompt_tokens, "cost": cost}

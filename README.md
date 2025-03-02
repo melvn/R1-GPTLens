@@ -12,6 +12,28 @@ This fork modifys the original authors work to include the use of reasoning mode
 
 ## Getting Start
 
+## Using Deepseek Reasoner
+
+This fork adds support for Deepseek Reasoner, a specialized model for reasoning tasks that can improve the accuracy of vulnerability detection.
+
+To use Deepseek Reasoner:
+
+1. Set your Deepseek API key in the environment:
+   ```sh
+   export DEEPSEEK_API_KEY="your-api-key-here"
+   ```
+
+2. Run the auditor with Deepseek Reasoner:
+   ```sh
+   python src/run_auditor.py --backend=deepseek-r1 --temperature=0.7 --topk=3 --num_auditor=1
+   ```
+   Note: The temperature parameter is passed for compatibility but has no effect with Deepseek Reasoner.
+
+3. Run the critic with Deepseek Reasoner:
+   ```sh
+   python src/run_critic.py --backend=deepseek-r1 --temperature=0 --auditor_dir="auditor_deepseek-r1_0.7_top3_1" --num_critic=1 --shot=few
+   ```
+
 ### Step 0: Set up your GPT-4 API
 
 Get GPT-4 API from https://platform.openai.com/account/api-keys

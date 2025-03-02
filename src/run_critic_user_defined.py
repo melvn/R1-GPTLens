@@ -82,7 +82,7 @@ def run(args):
 
 def parse_args():
     args = argparse.ArgumentParser()
-    args.add_argument('--backend', type=str, choices=['gpt-3.5-turbo','gpt-4', 'gpt-4-turbo-preview'], default='gpt-4-turbo-preview')
+    args.add_argument('--backend', type=str, choices=['gpt-3.5-turbo','gpt-4', 'gpt-4-turbo-preview', 'deepseek-r1'], default='gpt-4-turbo-preview')
     args.add_argument('--temperature', type=float, default=0)
     args.add_argument('--dataset', type=str, choices=['CVE'], default="CVE")
     args.add_argument('--auditor_dir', type=str, default="auditor_gpt-4_0.7_top3_1") #The auditor output directory
