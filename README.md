@@ -8,6 +8,7 @@ If you wish to run your own dataset, please switch to the "release" branch:
 ```sh
 git checkout release
 ```
+This fork modifys the original authors work to include the use of reasoning model for the critic stage in order to improve the level of accurary and precision in its detections. In addition claude support was added. New benchmarks on the original datasets are found at the bottom of this readme.
 
 ## Getting Start
 
