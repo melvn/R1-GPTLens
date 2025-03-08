@@ -79,7 +79,7 @@ python src/run_critic.py --backend=deepseek-r1 --temperature=0 --auditor_dir="au
 ### Step 3: Run the Ranker
 
 ```bash
-python src/run_rank.py --auditor_dir="auditor_deepseek-r1_0.7_top3_1" --critic_dir="critic_deepseek-r1_0_1_few" --strategy="default"
+python src/run_rank.py --auditor_dir="auditor_deepseek-r1_0.7_top3_1" --critic_dir="critic_deepseek-r1_0.0_1_few" --strategy="default"
 ```
 
 | Parameter     | Description                                     |
