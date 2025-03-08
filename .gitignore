@@ -9,3 +9,4 @@ data_sample/CVE_label/extract.py
 data_sample/CVE_label/raw_data.txt
 data_full/CVE_label/extract.py
 data_full/CVE_label/raw_data.txt
+gptlens_env/
