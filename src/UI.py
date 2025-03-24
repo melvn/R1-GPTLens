@@ -96,7 +96,7 @@ if st.session_state.section_active_auditor:
         model = st.radio(
             "Set the GPT model 👉",
             key="model",
-            options=["gpt-3.5-turbo", "gpt-4", "gpt-4-turbo-preview"],
+            options=["gpt-3.5-turbo", "gpt-4", "gpt-4-turbo-preview", "deepseek-r1", "deepseek-reasoner"],
             index=2
         )
         
@@ -193,7 +193,7 @@ if st.session_state.section_active_critic:
         model_c = st.radio(
             "Set the GPT model 👉",
             key="model_c",
-            options=["gpt-3.5-turbo", "gpt-4", "gpt-4-turbo-preview"],
+            options=["gpt-3.5-turbo", "gpt-4", "gpt-4-turbo-preview", "deepseek-r1", "deepseek-reasoner"],
             index=2
         )
         

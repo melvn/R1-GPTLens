@@ -1,17 +1,16 @@
-
-
-# GPTLens with Deepseek Reasoner
+# GPTLens with OpenAI GPT and Deepseek Reasoner
 
 This is a fork of the original [GPTLens repository](https://arxiv.org/pdf/2310.01152.pdf), which was presented in the paper "Large Language Model-Powered Smart Contract Vulnerability Detection: New Perspectives" at the IEEE Trust, Privacy and Security (TPS) conference 2023.
 
-This fork modifies the original authors' work to include the use of Deepseek Reasoner for both the auditor and critic stages, improving the accuracy and precision of vulnerability detection in smart contracts.
+This fork modifies the original authors' work to include support for both OpenAI GPT models (GPT-3.5-Turbo, GPT-4, GPT-4-Turbo) and Deepseek Reasoner models for both the auditor and critic stages, improving the accuracy and precision of vulnerability detection in smart contracts.
 
 ## Getting Started
 
 ### Prerequisites
 
 1. Python 3.8+ environment
-2. Deepseek API key
+2. OpenAI API key (for GPT models)
+3. Deepseek API key (for Deepseek models)
 
 ### Installation
 
@@ -28,16 +27,18 @@ source gptlens_env/bin/activate  # On Windows: gptlens_env\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### Setting Up Your API Key
+### Setting Up Your API Keys
 
-Set your Deepseek API key in the environment:
+Set your API keys in the environment:
 
 ```bash
 # On Linux/macOS
-export DEEPSEEK_API_KEY="your-api-key-here"
+export OPENAI_API_KEY="your-openai-api-key-here"
+export DEEPSEEK_API_KEY="your-deepseek-api-key-here"
 
 # On Windows
-set DEEPSEEK_API_KEY=your-api-key-here
+set OPENAI_API_KEY=your-openai-api-key-here
+set DEEPSEEK_API_KEY=your-deepseek-api-key-here
 ```
 
 ## Running the Vulnerability Detection Pipeline
@@ -47,6 +48,12 @@ The vulnerability detection process consists of three stages:
 1. **Auditor**: Identifies potential vulnerabilities in smart contracts
 2. **Critic**: Evaluates the vulnerabilities identified by the auditor
 3. **Ranker**: Combines auditor and critic outputs to produce final vulnerability scores
+
+### Model Options
+
+You can choose from the following models:
+- OpenAI models: `gpt-3.5-turbo`, `gpt-4`, `gpt-4-turbo-preview`
+- Deepseek models: `deepseek-r1`, `deepseek-reasoner`
 
 ### Step 1: Run the Auditor
 
